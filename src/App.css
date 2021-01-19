@@ -1,0 +1,21 @@
+h3 {
+  text-align: center;
+}
+
+.personalInformation,
+.educationInformationForm,
+.workExperienceForm {
+  display: grid;
+  width: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100px;
+  text-align: center;
+}
