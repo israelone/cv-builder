@@ -1,5 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import moment from "moment";
+import Input from "./Input/input";
+import Label from "./Label/label";
+
+const FormContainer = styled.div`
+  width: 500px;
+  height: fit-content;
+  margin: 0 auto;
+  border: 2px solid black;
+  margin-bottom: 10px;
+`;
+
+const FormHeader = styled.h3`
+  text-align: center;
+`;
 
 const Form = styled.form`
   display: grid;
@@ -8,63 +23,53 @@ const Form = styled.form`
   margin: 0 auto;
 `;
 
-const Label = styled.label`
-  grid-column: 1;
-`;
-
-const Input = styled.input`
-  grid-column: 2;
-`;
-
 const Button = styled.button`
-  text-align: center;
-  margin: 0 auto;
+  display: block;
+  margin: 0 auto 10px;
 `;
+
+const WorkExperienceContainer = styled.div`
+  display: flex;
+`;
+const WorkExperienceDescription = styled.p`
+  margin: 10px auto 7px;
+`;
+
+const CompanyName = styled.span``;
 
 class workExperienceForm extends Component {
-  state = {
-    workExp: [],
-    companyName: "",
-    role: "",
-    responsibilities: "",
-    city: "",
-    startDate: "",
-    endDate: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      workExp: [
+        {
+          companyName: "The Machine Maker",
+          role: "Machinist",
+          responsibilities: ["develope ", "submit ", "team "],
+          city: "somewhere",
+          date: "Jan 2021 - Jan 2023",
+        },
+      ],
+      companyName: "",
+      role: "",
+      responsibilities: "",
+      city: "",
+      startDate: "",
+      endDate: "",
+    };
+  }
+
+  dateFormatter = (date) => {
+    console.log(date);
+    return moment(date.replace(/\D/g, ""), "YYYYMMDD").format("MMM YYYY");
   };
 
-  companyNameInputHandler = (e) => {
-    e.preventDefault();
-
-    this.setState({ companyName: e.target.value });
-  };
-
-  roleInputHandler = (e) => {
-    e.preventDefault();
-
-    this.setState({ role: e.target.value });
-  };
-
-  responsibilitiesInputHandler = (e) => {
-    e.preventDefault();
-
-    this.setState({ responsibilities: e.target.value });
-  };
-
-  cityInputHandler = (e) => {
-    e.preventDefault();
-
-    this.setState({ city: e.target.value });
-  };
-
-  startDateInputHandler = (e) => {
-    e.preventDefault();
-
-    this.setState({ startDate: e.target.value });
-  };
-
-  endDateInputHandler = (e) => {
-    e.preventDefault();
-    this.setState({ endDate: e.target.value });
+  inputHandler = (e) => {
+    console.log(e);
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
   };
 
   addWorkExperienceHandler = () => {
@@ -74,48 +79,91 @@ class workExperienceForm extends Component {
       role: this.state.role,
       responsibilities: this.state.responsibilities,
       city: this.state.city,
-      date: this.state.startDate + " - " + this.state.endDate,
+      date:
+        this.dateFormatter(this.state.startDate) +
+        " - " +
+        this.dateFormatter(this.state.endDate),
     };
-
     currentWorkExp.push(newWorkExp);
-    this.setState({
-      workExp: currentWorkExp,
-    });
+    this.setState(
+      {
+        workExp: currentWorkExp,
+      },
+      this.addHandler
+    );
   };
+
+  addHandler = () => {
+    this.props.addWork(this.state.workExp);
+  };
+
   render() {
     return (
-      <div>
-        <h3>Work Experience</h3>
+      <FormContainer>
+        <FormHeader>Work Experience</FormHeader>
         {this.state.workExp.map((work, index) => {
           return (
-            <div key={index}>
-              <h3>{work.companyName}</h3>
-              <h3>{work.role}</h3>
-              <h3>{work.responsibilities}</h3>
-              <h3>{work.city}</h3>
-              <h3>{work.date}</h3>
-            </div>
+            <WorkExperienceContainer key={index}>
+              <WorkExperienceDescription>
+                {work.companyName}
+                <br></br>
+                {work.role}
+                <br></br> {work.responsibilities}
+                <br></br>
+                {work.city} <br></br>
+                {work.date}
+              </WorkExperienceDescription>
+            </WorkExperienceContainer>
           );
         })}
         <Form>
-          <Label>Company Name:</Label>
-          <Input onChange={this.companyNameInputHandler} type="text"></Input>
-          <Label>Role:</Label>
-          <Input onChange={this.roleInputHandler} type="text"></Input>
-          <Label>Responsibilities:</Label>
+          <Label text={"Company Name:"} />
           <Input
-            onChange={this.responsibilitiesInputHandler}
+            name="companyName"
+            required={true}
+            onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label>City:</Label>
-          <Input onChange={this.cityInputHandler} type="text"></Input>
-          <Label>From :</Label>
-          <Input onChange={this.startDateInputHandler} type="date"></Input>
-          <Label>To:</Label>
-          <Input onChange={this.endDateInputHandler} type="date"></Input>
+          <Label text={"Role:"} />
+          <Input
+            name="role"
+            required={true}
+            onChange={this.inputHandler}
+            type="text"
+          ></Input>
+          <Label text={"Responsibilities:"} />
+          <Input
+            name="responsibilities"
+            required={true}
+            onChange={this.inputHandler}
+            type="text"
+          ></Input>
+          <Label text={"City:"} />
+          <Input
+            name="city"
+            required={true}
+            onChange={this.inputHandler}
+            type="text"
+          ></Input>
+          <Label text={"From:"} />
+          <Input
+            name="startDate"
+            required={true}
+            onChange={this.inputHandler}
+            type="date"
+          ></Input>
+          <Label text={"To:"} />
+          <Input
+            name="endDate"
+            required={true}
+            onChange={this.inputHandler}
+            type="date"
+          ></Input>
         </Form>
-        <Button onClick={this.addWorkExperienceHandler}>Add Education</Button>
-      </div>
+        <Button onClick={this.addWorkExperienceHandler}>
+          Add Work Experience
+        </Button>
+      </FormContainer>
     );
   }
 }
