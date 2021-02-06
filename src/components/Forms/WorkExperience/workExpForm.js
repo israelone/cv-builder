@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import Input from "./Input/input";
-import Label from "./Label/label";
+import WorkInformation from "./WorkInformation/WorkInformation";
 
 const FormContainer = styled.div`
   width: 500px;
@@ -10,6 +9,14 @@ const FormContainer = styled.div`
   margin: 0 auto;
   border: 2px solid black;
   margin-bottom: 10px;
+`;
+
+const Input = styled.input`
+  grid-column: 2;
+`;
+
+const Label = styled.label`
+  grid-column: 1;
 `;
 
 const FormHeader = styled.h3`
@@ -28,34 +35,20 @@ const Button = styled.button`
   margin: 0 auto 10px;
 `;
 
-const WorkExperienceContainer = styled.div`
-  display: flex;
-`;
-const WorkExperienceDescription = styled.p`
-  margin: 10px auto 7px;
-`;
-
-const CompanyName = styled.span``;
+const Icon = styled.i``;
 
 class workExperienceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      workExp: [
-        {
-          companyName: "The Machine Maker",
-          role: "Machinist",
-          responsibilities: ["develope ", "submit ", "team "],
-          city: "somewhere",
-          date: "Jan 2021 - Jan 2023",
-        },
-      ],
+      workExp: this.props.workExperience,
       companyName: "",
       role: "",
-      responsibilities: "",
+      duties: "",
       city: "",
       startDate: "",
       endDate: "",
+      dutiesList: [],
     };
   }
 
@@ -77,7 +70,7 @@ class workExperienceForm extends Component {
     let newWorkExp = {
       companyName: this.state.companyName,
       role: this.state.role,
-      responsibilities: this.state.responsibilities,
+      duties: this.state.duties,
       city: this.state.city,
       date:
         this.dateFormatter(this.state.startDate) +
@@ -97,62 +90,68 @@ class workExperienceForm extends Component {
     this.props.addWork(this.state.workExp);
   };
 
+  addDuty = () => {
+    let currentDuties = this.state.dutiesList;
+    currentDuties = currentDuties.concat(this.state.duties);
+    this.setState({
+      dutiesList: currentDuties,
+    });
+  };
+
   render() {
     return (
       <FormContainer>
         <FormHeader>Work Experience</FormHeader>
         {this.state.workExp.map((work, index) => {
           return (
-            <WorkExperienceContainer key={index}>
-              <WorkExperienceDescription>
-                {work.companyName}
-                <br></br>
-                {work.role}
-                <br></br> {work.responsibilities}
-                <br></br>
-                {work.city} <br></br>
-                {work.date}
-              </WorkExperienceDescription>
-            </WorkExperienceContainer>
+            <WorkInformation
+              key={index}
+              companyName={work.companyName}
+              role={work.role}
+              dutiesList={work.dutiesList}
+              city={work.city}
+              date={work.date}
+            />
           );
         })}
         <Form>
-          <Label text={"Company Name:"} />
+          <Label>Company Name:</Label>
           <Input
             name="companyName"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"Role:"} />
+          <Label>Role:</Label>
           <Input
             name="role"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"Responsibilities:"} />
+          <Label>Duties:</Label>
           <Input
-            name="responsibilities"
+            name="duties"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"City:"} />
+          <Icon className={"fas fa-plus-circle"} onClick={() => this.addDuty} />
+          <Label>City:</Label>
           <Input
             name="city"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"From:"} />
+          <Label>From:</Label>
           <Input
             name="startDate"
             required={true}
             onChange={this.inputHandler}
             type="date"
           ></Input>
-          <Label text={"To:"} />
+          <Label>To:</Label>
           <Input
             name="endDate"
             required={true}

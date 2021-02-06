@@ -1,17 +1,19 @@
 import React, { Component } from "react";
-import WorkExperienceForm from "./Forms/workExpForm.js";
-import EducationForm from "./Forms/educationForm.js";
-import PersonalInfoForm from "./Forms/personalInfoForm.js";
+import WorkExperienceForm from "./Forms/WorkExperience/workExpForm.js";
+import EducationForm from "./Forms/Education/educationForm.js";
+import PersonalInfoForm from "./Forms/PersonalInformation/personalInfoForm.js";
 import styled from "styled-components";
-import Resume from "./resume";
-//Adding work and school experience, seems to be working.
-//I need to add a way to delete not wanted things
-//Personal Information should be added as well,
-//Lastly create a view where a user can see their CV done.
+import Resume from "./CV/resume";
+
+//removeInformationHandler does not work at the moment
 
 const Button = styled.button`
   display: block;
   margin: 0 auto 10px;
+`;
+
+const ApplicationHeader = styled.h2`
+  text-align: center;
 `;
 
 class Forms extends Component {
@@ -26,7 +28,7 @@ class Forms extends Component {
     summary: "I have been cleaning restrooms for a while",
     education: [
       {
-        name: "Mary G. Montgomery High School",
+        schoolName: "Mary G. Montgomery High School",
         degree: "High School Diploma",
         graduationYear: "2008",
       },
@@ -35,9 +37,9 @@ class Forms extends Component {
       {
         companyName: "Izzy Dev",
         role: "Application Developer",
-        responsibilities: ["develope ", "submit ", "team "],
+        dutiesList: ["develope", "submit ", "team "],
         city: "somewhere",
-        date: "jan 2021 - jan 2023",
+        date: "Jan 2021 - Jan 2023",
       },
     ],
     submitted: false,
@@ -76,6 +78,10 @@ class Forms extends Component {
     }
   };
 
+  removeInformationHandler = (index) => {
+    console.log(index);
+  };
+
   render() {
     return (
       <div>
@@ -83,11 +89,27 @@ class Forms extends Component {
           <Resume information={this.state} />
         ) : (
           <div>
+            <ApplicationHeader>CV Application</ApplicationHeader>
             <PersonalInfoForm
+              name={this.state.name}
+              occupation={this.state.occupation}
+              address={this.state.address}
+              email={this.state.email}
+              number={this.state.number}
+              country={this.state.country}
+              city={this.state.city}
+              summary={this.state.summary}
               personalInformationHandler={this.personalInformationHandler}
             />
-            <EducationForm addEducationHandler={this.addEducation} />
-            <WorkExperienceForm addWork={this.addWorkExperience} />
+            <EducationForm
+              schools={this.state.education}
+              addEducationHandler={this.addEducation}
+              removeInformation={() => this.removeInformationHandler()}
+            />
+            <WorkExperienceForm
+              workExperience={this.state.workExperience}
+              addWork={this.addWorkExperience}
+            />
           </div>
         )}{" "}
         <Button onClick={this.submitionStatus}>

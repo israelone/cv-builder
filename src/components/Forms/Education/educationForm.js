@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import Input from "./Input/input";
-import Label from "./Label/label";
+import SchoolInformation from "./SchoolInformation/schoolInformation";
 
 const FormContainer = styled.div`
   width: 500px;
@@ -18,6 +17,14 @@ const Form = styled.form`
   margin: 0 auto;
 `;
 
+const Input = styled.input`
+  grid-column: 2;
+`;
+
+const Label = styled.label`
+  grid-column: 1;
+`;
+
 const FormHeader = styled.h3`
   text-align: center;
 `;
@@ -27,31 +34,12 @@ const Button = styled.button`
   margin: 0 auto 10px;
 `;
 
-const SchoolsContainer = styled.div`
-  display: flex;
-`;
-
-const SchoolInformation = styled.p`
-  margin: 10px auto 7px;
-  text-align: center;
-`;
-
-const SchoolName = styled.span`
-  font-weight: bold;
-`;
-
 class EducationForm extends Component {
   state = {
-    schools: [
-      {
-        name: "High School",
-        degree: "High School Diploma",
-        graduationYear: "2008",
-      },
-    ],
+    schools: this.props.schools,
     schoolName: "",
     degree: "",
-    graduationDate: "",
+    graduationYear: "",
   };
 
   dateFormatter = (date) => {
@@ -70,7 +58,7 @@ class EducationForm extends Component {
     let newSchool = {
       schoolName: this.state.schoolName,
       degree: this.state.degree,
-      graduationYear: this.dateFormatter(this.state.graduationDate),
+      graduationYear: this.dateFormatter(this.state.graduationYear),
     };
     currentSchools.push(newSchool);
     this.setState(
@@ -91,37 +79,41 @@ class EducationForm extends Component {
         <FormHeader>Education Information</FormHeader>
         {this.state.schools.map((school, index) => {
           return (
-            <SchoolsContainer key={index}>
-              <SchoolInformation>
-                <SchoolName>{school.name}</SchoolName>
-                <br></br> {school.degree}
-                <br></br>
-                {school.graduationYear}
-              </SchoolInformation>
-            </SchoolsContainer>
+            <React.Fragment>
+              <SchoolInformation
+                key={index}
+                schoolName={school.schoolName}
+                graduationYear={school.graduationYear}
+                degree={school.degree}
+                removeInformation={() => this.props.removeInformation}
+                index={index}
+              />
+            </React.Fragment>
           );
         })}
         <Form>
-          <Label text={"School:"} />
+          <Label>School Name:</Label>
           <Input
             name="schoolName"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"Degree:"} />
+          <Label>Degree:</Label>
           <Input
             name="degree"
             required={true}
             onChange={this.inputHandler}
             type="text"
           ></Input>
-          <Label text={"Graduation Date:"} />
+          <Label>Graduation Year:</Label>
           <Input
-            name="graduationDate"
+            name="graduationYear"
             required={true}
             onChange={this.inputHandler}
-            type="date"
+            type="number"
+            min="1950"
+            max="2050"
           ></Input>
         </Form>
         <Button onClick={this.addSchoolHandler}>Add Education</Button>

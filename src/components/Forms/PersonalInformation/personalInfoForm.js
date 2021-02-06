@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Input from "./Input/input";
-import Label from "./Label/label";
 
 const FormContainer = styled.div`
   width: 500px;
@@ -9,6 +7,13 @@ const FormContainer = styled.div`
   margin: 0 auto;
   border: 2px solid black;
   margin-bottom: 10px;
+`;
+
+const Input = styled.input`
+  grid-column: 2;
+`;
+const Label = styled.label`
+  grid-column: 1;
 `;
 
 const FormHeader = styled.h3`
@@ -21,67 +26,80 @@ const Form = styled.form`
   margin: 0 auto;
 `;
 
+const TextArea = styled.textarea`
+  margin-bottom: 10px;
+`;
+
 const PersonalInfoForm = (props) => {
   return (
     <FormContainer>
       <FormHeader>Personal Information</FormHeader>
       <Form>
-        <Label text={"Name:"} />
+        <Label>Name:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="text"
           name="name"
+          placeHolder={"Your name"}
+          value={props.name}
         ></Input>
-        <Label text={"Occupation:"} />
+        <Label>Occupation:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="text"
           name="occupation"
+          value={props.occupation}
         ></Input>
-        <Label text={"Address:"} />
+        <Label>Address:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="text"
           name="address"
+          value={props.address}
         ></Input>
-        <Label text={"City:"} />
+        <Label>City:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="text"
           name="city"
+          value={props.city}
         ></Input>
-        <Label text={"Country:"} />
+        <Label>Country:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="text"
           name="country"
+          value={props.country}
         ></Input>
-        <Label text={"Email:"} />
+        <Label>Email:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="email"
           name="email"
+          value={props.email}
         ></Input>
-        <Label text={"Phone Number:"} />
+        <Label>Phone Number:</Label>
         <Input
           onChange={props.personalInformationHandler}
           required={true}
           type="tel"
           name="number"
+          value={props.number}
         ></Input>
-        <Label text={"Summary:"} />
-        <Input
+        <Label>Summary:</Label>
+        <TextArea
           onChange={props.personalInformationHandler}
           required={true}
-          type="text-area"
+          type="textarea"
           name="summary"
-        ></Input>
+          value={props.summary}
+        ></TextArea>
       </Form>
     </FormContainer>
   );
