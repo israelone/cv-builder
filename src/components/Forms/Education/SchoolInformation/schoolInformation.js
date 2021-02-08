@@ -52,9 +52,7 @@ class SchoolInformation extends Component {
     return (
       <Container>
         <Name contentEditable={true}>{this.props.schoolName}</Name>
-        <Degree nm b vbbbbcontentEditable={true}>
-          {this.props.degree}
-        </Degree>
+        <Degree contentEditable={true}>{this.props.degree}</Degree>
         <GraduationYear>{this.props.graduationYear}</GraduationYear>
         <Icon
           onClick={() => this.props.removeInformation(this.props.index)}

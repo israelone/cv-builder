@@ -9,11 +9,27 @@ const FormContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const Input = styled.input`
-  grid-column: 2;
+const InputContainer = styled.div`
+  background-color: white;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin: 10px 0;
 `;
+
+const Input = styled.input`
+  &:focus {
+    outline: none;
+  }
+  border: none;
+  border-bottom: 1px solid black;
+  width: 98%;
+  font-size: 20px;
+  padding: 0;
+`;
+
 const Label = styled.label`
-  grid-column: 1;
+  font-size: 14px;
+  margin: 5px 0px;
 `;
 
 const FormHeader = styled.h3`
@@ -35,71 +51,88 @@ const PersonalInfoForm = (props) => {
     <FormContainer>
       <FormHeader>Personal Information</FormHeader>
       <Form>
-        <Label>Name:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="text"
-          name="name"
-          placeHolder={"Your name"}
-          value={props.name}
-        ></Input>
-        <Label>Occupation:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="text"
-          name="occupation"
-          value={props.occupation}
-        ></Input>
-        <Label>Address:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="text"
-          name="address"
-          value={props.address}
-        ></Input>
-        <Label>City:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="text"
-          name="city"
-          value={props.city}
-        ></Input>
-        <Label>Country:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="text"
-          name="country"
-          value={props.country}
-        ></Input>
-        <Label>Email:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="email"
-          name="email"
-          value={props.email}
-        ></Input>
-        <Label>Phone Number:</Label>
-        <Input
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="tel"
-          name="number"
-          value={props.number}
-        ></Input>
-        <Label>Summary:</Label>
-        <TextArea
-          onChange={props.personalInformationHandler}
-          required={true}
-          type="textarea"
-          name="summary"
-          value={props.summary}
-        ></TextArea>
+        <InputContainer>
+          <Label>Name:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="text"
+            name="name"
+            placeHolder={"Your name"}
+            value={props.name}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>Occupation:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="text"
+            name="occupation"
+            value={props.occupation}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>Address:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="text"
+            name="address"
+            value={props.address}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>City:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="text"
+            name="city"
+            value={props.city}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>Country:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="text"
+            name="country"
+            value={props.country}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>Email:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="email"
+            name="email"
+            value={props.email}
+          ></Input>
+        </InputContainer>
+        <InputContainer>
+          <Label>Phone Number:</Label>
+          <Input
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="tel"
+            name="number"
+            value={props.number}
+          ></Input>
+        </InputContainer>
+
+        <InputContainer>
+          <Label>Summary:</Label>
+          <TextArea
+            onChange={props.personalInformationHandler}
+            required={true}
+            type="textarea"
+            name="summary"
+            value={props.summary}
+          ></TextArea>
+        </InputContainer>
       </Form>
     </FormContainer>
   );

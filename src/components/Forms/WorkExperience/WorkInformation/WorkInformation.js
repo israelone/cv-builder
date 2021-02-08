@@ -60,21 +60,16 @@ class WorkInformation extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.duties);
-  }
   render() {
     return (
       <Container>
         <CompanyName>{this.props.companyName}</CompanyName>
         <Role>{this.props.role}</Role>
-
         <DutiesList>
           {this.props.dutiesList.map((duty) => {
             return <Duty>{duty}</Duty>;
           })}
         </DutiesList>
-
         <City>{this.props.city}</City>
         <Date>{this.props.date}</Date>
         <Icon className="fas fa-times-circle" />

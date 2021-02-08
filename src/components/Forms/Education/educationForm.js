@@ -11,18 +11,32 @@ const FormContainer = styled.div`
   border: 2px solid black;
 `;
 
+const InputContainer = styled.div`
+  background-color: white;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin: 10px 0;
+`;
+
 const Form = styled.form`
   display: grid;
   width: 300px;
   margin: 0 auto;
 `;
-
 const Input = styled.input`
-  grid-column: 2;
+  &:focus {
+    outline: none;
+  }
+  border: none;
+  border-bottom: 1px solid black;
+  width: 98%;
+  font-size: 20px;
+  padding: 0;
 `;
 
 const Label = styled.label`
-  grid-column: 1;
+  font-size: 14px;
+  margin: 5px 0px;
 `;
 
 const FormHeader = styled.h3`
@@ -92,29 +106,35 @@ class EducationForm extends Component {
           );
         })}
         <Form>
-          <Label>School Name:</Label>
-          <Input
-            name="schoolName"
-            required={true}
-            onChange={this.inputHandler}
-            type="text"
-          ></Input>
-          <Label>Degree:</Label>
-          <Input
-            name="degree"
-            required={true}
-            onChange={this.inputHandler}
-            type="text"
-          ></Input>
-          <Label>Graduation Year:</Label>
-          <Input
-            name="graduationYear"
-            required={true}
-            onChange={this.inputHandler}
-            type="number"
-            min="1950"
-            max="2050"
-          ></Input>
+          <InputContainer>
+            <Label>School Name:</Label>
+            <Input
+              name="schoolName"
+              required={true}
+              onChange={this.inputHandler}
+              type="text"
+            ></Input>
+          </InputContainer>
+          <InputContainer>
+            <Label>Degree:</Label>
+            <Input
+              name="degree"
+              required={true}
+              onChange={this.inputHandler}
+              type="text"
+            ></Input>
+          </InputContainer>
+          <InputContainer>
+            <Label>Graduation Year:</Label>
+            <Input
+              name="graduationYear"
+              required={true}
+              onChange={this.inputHandler}
+              type="number"
+              min="1950"
+              max="2050"
+            ></Input>
+          </InputContainer>
         </Form>
         <Button onClick={this.addSchoolHandler}>Add Education</Button>
       </FormContainer>
