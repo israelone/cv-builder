@@ -3,7 +3,7 @@ import styled from "styled-components";
 import IntroSection from "./IntroSection/intro";
 import ProfesionalSumSection from "./ProfesionalSummary/profesionalSummary";
 import EducationSection from "./EducationSection/education";
-import WorkHistorySection from "./WorkSection/work";
+import WorkSection from "./WorkSection/workSection";
 
 const ResumeContainer = styled.div`
   width: 75%;
@@ -30,10 +30,8 @@ class Resume extends Component {
           email={this.props.information.email}
         />
         <ProfesionalSumSection summary={this.props.information.summary} />
-        {/* <WorkHistorySection
-          workHistory={this.props.information.workExperience}
-        /> */}
-        <EducationSection />
+        <WorkSection workHistory={this.props.information.workExperience} />
+        <EducationSection educationHistory={this.props.information.education} />
       </ResumeContainer>
     );
   }

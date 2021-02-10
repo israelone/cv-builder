@@ -9,6 +9,7 @@ const HorizontalRule = styled.hr`
 const ProfesionalSummaryHeader = styled.h3`
   margin-left: 10px;
   margin-bottom: 0;
+  font-family: "Verdana";
 `;
 
 const ProfesionalSummary = styled.p`

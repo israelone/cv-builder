@@ -17,18 +17,25 @@ const WorkHistory = styled.h3`
   margin-left: 10px;
 `;
 
-const WorkHistorySection = (props) => {
+const HorizontalRule = styled.hr`
+  width: 35%;
+  display: inline-block;
+  margin-left: 10px;
+`;
+
+const WorkSection = (props) => {
+  console.log(props.workHistory);
   return (
     <React.Fragment>
       <WorkHistory>WORK HISTORY</WorkHistory>
+      <HorizontalRule />
       {props.workHistory.map((work, index) => {
-        console.log(work);
         return (
           <div>
             <DateWorked>{work.date}</DateWorked>
             <WorkInformation>{`${work.role} | ${work.companyName} | ${work.city}`}</WorkInformation>
             <ul>
-              {work.duties.map((responsibility, index) => {
+              {work.dutiesList.map((responsibility, index) => {
                 return <li key={index}>{responsibility}</li>;
               })}
             </ul>
@@ -39,4 +46,4 @@ const WorkHistorySection = (props) => {
   );
 };
 
-export default WorkHistorySection;
+export default WorkSection;

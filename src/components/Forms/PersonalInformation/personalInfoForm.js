@@ -14,6 +14,7 @@ const InputContainer = styled.div`
   border-radius: 5px;
   padding-left: 10px;
   margin: 10px 0;
+  display: grid;
 `;
 
 const Input = styled.input`
@@ -30,10 +31,13 @@ const Input = styled.input`
 const Label = styled.label`
   font-size: 14px;
   margin: 5px 0px;
+  font-family: Roboto;
 `;
 
 const FormHeader = styled.h3`
   text-align: center;
+  font-family: Cabin;
+  letter-spacing: 5px;
 `;
 
 const Form = styled.form`
@@ -44,6 +48,8 @@ const Form = styled.form`
 
 const TextArea = styled.textarea`
   margin-bottom: 10px;
+  width: 273px;
+  height: 134px;
 `;
 
 const PersonalInfoForm = (props) => {
@@ -119,6 +125,7 @@ const PersonalInfoForm = (props) => {
             required={true}
             type="tel"
             name="number"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             value={props.number}
           ></Input>
         </InputContainer>

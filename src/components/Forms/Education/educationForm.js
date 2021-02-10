@@ -37,10 +37,13 @@ const Input = styled.input`
 const Label = styled.label`
   font-size: 14px;
   margin: 5px 0px;
+  font-family: Roboto;
 `;
 
 const FormHeader = styled.h3`
   text-align: center;
+  font-family: Cabin;
+  letter-spacing: 5px;
 `;
 
 const Button = styled.button`
@@ -50,7 +53,7 @@ const Button = styled.button`
 
 class EducationForm extends Component {
   state = {
-    schools: this.props.schools,
+    education: this.props.education,
     schoolName: "",
     degree: "",
     graduationYear: "",
@@ -68,7 +71,7 @@ class EducationForm extends Component {
   };
 
   addSchoolHandler = () => {
-    let currentSchools = [...this.state.schools];
+    let currentSchools = [...this.state.education];
     let newSchool = {
       schoolName: this.state.schoolName,
       degree: this.state.degree,
@@ -84,14 +87,23 @@ class EducationForm extends Component {
   };
 
   addHandler = () => {
-    this.props.addEducationHandler(this.state.schools);
+    this.props.addEducationHandler(this.state.education);
+  };
+
+  removeInformationHandler = (index) => {
+    let currentInformation = [...this.state.education];
+    currentInformation.splice(index, 1);
+    this.setState({
+      education: currentInformation,
+    });
+    this.props.removeInformation(index);
   };
 
   render() {
     return (
       <FormContainer>
         <FormHeader>Education Information</FormHeader>
-        {this.state.schools.map((school, index) => {
+        {this.state.education.map((school, index) => {
           return (
             <React.Fragment>
               <SchoolInformation
@@ -99,7 +111,7 @@ class EducationForm extends Component {
                 schoolName={school.schoolName}
                 graduationYear={school.graduationYear}
                 degree={school.degree}
-                removeInformation={() => this.props.removeInformation}
+                removeInformation={() => this.removeInformationHandler()}
                 index={index}
               />
             </React.Fragment>

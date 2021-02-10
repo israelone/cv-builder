@@ -13,7 +13,11 @@ const Button = styled.button`
 `;
 
 const ApplicationHeader = styled.h2`
+
   text-align: center;
+    letter-spacing: 7px;
+    font-family:Roboto;
+}
 `;
 
 class Forms extends Component {
@@ -78,8 +82,20 @@ class Forms extends Component {
     }
   };
 
-  removeInformationHandler = (index) => {
-    console.log(index);
+  removeSchoolInformationHandler = (index) => {
+    let currentInformation = [...this.state.education];
+    currentInformation.splice(index, 1);
+    this.setState({
+      education: currentInformation,
+    });
+  };
+
+  removeWorkInformationHandler = (index) => {
+    let currentInformation = [...this.state.workExperience];
+    currentInformation.splice(index, 1);
+    this.setState({
+      workExperience: currentInformation,
+    });
   };
 
   render() {
@@ -102,13 +118,14 @@ class Forms extends Component {
               personalInformationHandler={this.personalInformationHandler}
             />
             <EducationForm
-              schools={this.state.education}
+              education={this.state.education}
               addEducationHandler={this.addEducation}
-              removeInformation={() => this.removeInformationHandler()}
+              removeInformation={() => this.removeSchoolInformationHandler()}
             />
             <WorkExperienceForm
               workExperience={this.state.workExperience}
               addWork={this.addWorkExperience}
+              removeInformation={() => this.removeWorkInformationHandler()}
             />
           </div>
         )}{" "}

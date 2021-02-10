@@ -39,10 +39,13 @@ const Input = styled.input`
 const Label = styled.label`
   font-size: 14px;
   margin: 5px 0px;
+  font-family: Roboto;
 `;
 
 const FormHeader = styled.h3`
   text-align: center;
+  font-family: Cabin;
+  letter-spacing: 5px;
 `;
 
 const Form = styled.form`
@@ -150,6 +153,15 @@ class workExperienceForm extends Component {
     });
   };
 
+  removeInformationHandler = (index) => {
+    let currentInformation = [...this.state.workExp];
+    currentInformation.splice(index, 1);
+    this.setState({
+      workExp: currentInformation,
+    });
+    this.props.removeInformation(index);
+  };
+
   render() {
     return (
       <FormContainer>
@@ -163,6 +175,7 @@ class workExperienceForm extends Component {
               dutiesList={work.dutiesList}
               city={work.city}
               date={work.date}
+              removeInformation={() => this.removeInformationHandler()}
             />
           );
         })}
@@ -205,6 +218,7 @@ class workExperienceForm extends Component {
                     text={duty}
                     ley={index}
                     index={index}
+                    removeInformation={() => this.removeInformationHandler()}
                   />
                 );
               })}

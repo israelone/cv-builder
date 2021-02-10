@@ -6,10 +6,12 @@ const Container = styled.div`
   height: 58px;
   width: 70%;
   display: grid;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
   align-content: center;
   margin: 10px auto;
   overflow: hidden;
-  grid-template-columns: 8fr 1fr;
+  grid-template-columns: 8fr 1.5fr;
 `;
 
 const Name = styled.h4`
@@ -30,14 +32,33 @@ const GraduationYear = styled.h5`
   margin: 0;
 `;
 
-const Icon = styled.i`
+const IconsContainer = styled.div`
+  grid-row-start: 2;
+  grid-row-end: 3;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  grid-column: 2;
+`;
+
+const Icons = styled.i`
   ${Container}:hover & {
     display: inline-block;
   }
+`;
+
+const RemoveIcon = styled(Icons)`
   display: none;
   grid-column: 2;
   grid-row: 2;
   color: #e87676;
+  cursor: pointer;
+`;
+
+const EditIcon = styled(Icons)`
+  display: none;
+  grid-column: 2;
+  grid-row: 2;
   cursor: pointer;
 `;
 
@@ -46,18 +67,44 @@ class SchoolInformation extends Component {
     super(props);
     this.state = {
       showInformation: false,
+      index: props.index,
+      name: "schools",
+      editable: false,
     };
   }
+
+  editableToggleHandler = () => {
+    console.log("worked");
+    let currentState = this.state.editable;
+    this.setState({
+      editable: !currentState,
+    });
+  };
+
   render() {
     return (
       <Container>
-        <Name contentEditable={true}>{this.props.schoolName}</Name>
-        <Degree contentEditable={true}>{this.props.degree}</Degree>
-        <GraduationYear>{this.props.graduationYear}</GraduationYear>
-        <Icon
-          onClick={() => this.props.removeInformation(this.props.index)}
-          className="fas fa-times-circle"
-        ></Icon>
+        <Name contentEditable={this.state.editable}>
+          {this.props.schoolName}
+        </Name>
+        <Degree contentEditable={this.state.editable}>
+          {this.props.degree}
+        </Degree>
+        <GraduationYear contentEditable={this.state.editable}>
+          {this.props.graduationYear}
+        </GraduationYear>
+        <IconsContainer>
+          <RemoveIcon
+            onClick={() => this.props.removeInformation(this.state.index)}
+            className="fas fa-trash-alt"
+          ></RemoveIcon>
+          <EditIcon
+            onClick={() => this.editableToggleHandler()}
+            className={
+              this.state.editable ? "fas fa-times-circle" : "fas fa-edit"
+            }
+          ></EditIcon>
+        </IconsContainer>
       </Container>
     );
   }
