@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  border: 1px solid black;
   height: fit-content;
   width: 70%;
   display: grid;
@@ -11,6 +10,9 @@ const Container = styled.div`
   overflow: hidden;
   grid-template-columns: 8fr 1.5fr;
   padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  font-family: Roboto;
 `;
 
 const CompanyName = styled.h4`
@@ -39,11 +41,10 @@ const DutiesList = styled.ul`
   overflow: hidden;
   grid-column: 1;
 `;
+
 const IconsContainer = styled.div`
   grid-row: 3;
-  /* grid-row-end: 3; */
   display: flex;
-
   justify-content: space-around;
   height: 100%;
   grid-column: 2;

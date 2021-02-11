@@ -3,10 +3,17 @@ import styled from "styled-components";
 
 const FormContainer = styled.div`
   width: 500px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin: 0 auto;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-bottom: 10px;
+  background-color: #2c698d;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 7px 1px #000000;
+  box-shadow: 0px 0px 7px 1px #000000;
 `;
 
 const InputContainer = styled.div`
@@ -23,9 +30,10 @@ const Input = styled.input`
   }
   border: none;
   border-bottom: 1px solid black;
-  width: 98%;
+  width: 95%;
   font-size: 20px;
   padding: 0;
+  padding-left: 5px;
 `;
 
 const Label = styled.label`
@@ -38,17 +46,18 @@ const FormHeader = styled.h3`
   text-align: center;
   font-family: Cabin;
   letter-spacing: 5px;
+  color: #fff;
 `;
 
 const Form = styled.form`
   display: grid;
-  width: 300px;
+  width: 80%;
   margin: 0 auto;
 `;
 
 const TextArea = styled.textarea`
   margin-bottom: 10px;
-  width: 273px;
+  width: 370px;
   height: 134px;
 `;
 

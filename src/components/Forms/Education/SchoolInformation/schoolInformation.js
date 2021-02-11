@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  border: 1px solid black;
   height: 58px;
   width: 70%;
   display: grid;
@@ -12,6 +11,9 @@ const Container = styled.div`
   margin: 10px auto;
   overflow: hidden;
   grid-template-columns: 8fr 1.5fr;
+  background-color: #fff;
+  border-radius: 5px;
+  font-family: Roboto;
 `;
 
 const Name = styled.h4`
@@ -74,7 +76,6 @@ class SchoolInformation extends Component {
   }
 
   editableToggleHandler = () => {
-    console.log("worked");
     let currentState = this.state.editable;
     this.setState({
       editable: !currentState,

@@ -3,12 +3,20 @@ import styled from "styled-components";
 import moment from "moment";
 import WorkInformation from "./WorkInformation/WorkInformation";
 import Duty from "./WorkInformation/duty";
+
 const FormContainer = styled.div`
   width: 500px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin: 0 auto;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-bottom: 10px;
+  background-color: #2c698d;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 7px 1px #000000;
+  box-shadow: 0px 0px 7px 1px #000000;
 `;
 
 const InputContainer = styled.div`
@@ -21,7 +29,9 @@ const InputContainer = styled.div`
   border-radius: 5px;
   padding-left: 10px;
   margin: 10px 0;
+  display: grid;
 `;
+
 const Input = styled.input`
   &.dutiesInput {
     grid-row: 2;
@@ -31,7 +41,7 @@ const Input = styled.input`
   }
   border: none;
   border-bottom: 1px solid black;
-  width: 98%;
+  width: 95%;
   font-size: 20px;
   padding: 0;
 `;
@@ -46,11 +56,12 @@ const FormHeader = styled.h3`
   text-align: center;
   font-family: Cabin;
   letter-spacing: 5px;
+  color: #fff;
 `;
 
 const Form = styled.form`
   display: grid;
-  width: 300px;
+  width: 80%;
 
   margin: 0 auto;
 `;
@@ -67,6 +78,7 @@ const Icon = styled.i`
   align-self: center;
   justify-self: center;
 `;
+
 const DutiesList = styled.ul`
   display: ${(props) => (props.show ? "none" : "grid")};
   grid-template-columns: 8fr 1fr;

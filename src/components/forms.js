@@ -12,12 +12,19 @@ const Button = styled.button`
   margin: 0 auto 10px;
 `;
 
-const ApplicationHeader = styled.h2`
+const Next = styled(Button)``;
 
+const Back = styled(Button)``;
+
+const ApplicationHeader = styled.h2`
   text-align: center;
-    letter-spacing: 7px;
-    font-family:Roboto;
-}
+  letter-spacing: 7px;
+  font-family: Roboto;
+  color: #2c698d;
+`;
+
+const FormsContainer = styled.div`
+  display: grid;
 `;
 
 class Forms extends Component {
@@ -47,6 +54,7 @@ class Forms extends Component {
       },
     ],
     submitted: false,
+    currentForm: 1,
   };
 
   addWorkExperience = (e) => {
@@ -61,8 +69,7 @@ class Forms extends Component {
     });
   };
 
-  submitionStatus = (e) => {
-    e.preventDefault();
+  submitionStatus = () => {
     this.setState({
       submitted: !this.state.submitted,
     });
@@ -98,14 +105,34 @@ class Forms extends Component {
     });
   };
 
+  updateCurrentForm = (e) => {
+    e.preventDefault();
+    console.log(e.target.innerText);
+    if (e.target.innerText === "Next") {
+      this.setState({
+        currentForm: this.state.currentForm + 1,
+      });
+    } else if (
+      e.target.innerText === "Back" ||
+      e.target.innerText === "Cancel"
+    ) {
+      this.setState({
+        currentForm: this.state.currentForm - 1,
+      });
+    } else if (e.target.innerText === "Submit") {
+      this.setState({
+        currentForm: this.state.currentForm + 1,
+      });
+      this.submitionStatus();
+    }
+  };
+
   render() {
     return (
-      <div>
-        {this.state.submitted ? (
-          <Resume information={this.state} />
-        ) : (
-          <div>
-            <ApplicationHeader>CV Application</ApplicationHeader>
+      <FormsContainer>
+        <React.Fragment>
+          <ApplicationHeader>CV Application</ApplicationHeader>
+          {this.state.currentForm === 1 ? (
             <PersonalInfoForm
               name={this.state.name}
               occupation={this.state.occupation}
@@ -117,22 +144,38 @@ class Forms extends Component {
               summary={this.state.summary}
               personalInformationHandler={this.personalInformationHandler}
             />
+          ) : this.state.currentForm === 2 ? (
             <EducationForm
               education={this.state.education}
               addEducationHandler={this.addEducation}
               removeInformation={() => this.removeSchoolInformationHandler()}
             />
+          ) : this.state.currentForm === 3 ? (
             <WorkExperienceForm
               workExperience={this.state.workExperience}
               addWork={this.addWorkExperience}
               removeInformation={() => this.removeWorkInformationHandler()}
             />
-          </div>
-        )}{" "}
-        <Button onClick={this.submitionStatus}>
-          {this.state.submitted ? "Cancel" : "Submit"}
-        </Button>
-      </div>
+          ) : (
+            <Resume information={this.state} />
+          )}
+        </React.Fragment>
+        {this.state.currentForm === 1 ? (
+          <Next onClick={this.updateCurrentForm}>Next</Next>
+        ) : this.state.currentForm === 2 ? (
+          <React.Fragment>
+            <Back onClick={this.updateCurrentForm}>Back</Back>
+            <Next onClick={this.updateCurrentForm}>Next</Next>
+          </React.Fragment>
+        ) : this.state.currentForm === 3 ? (
+          <React.Fragment>
+            <Back onClick={this.updateCurrentForm}>Back</Back>
+            <Next onClick={this.updateCurrentForm}>Next</Next>
+          </React.Fragment>
+        ) : (
+          <Back onClick={this.updateCurrentForm}>Back</Back>
+        )}
+      </FormsContainer>
     );
   }
 }
