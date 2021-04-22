@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HorizontalRule = styled.hr`
-  width: 35%;
+  width: 275px;
   display: inline-block;
   margin-left: 10px;
 `;

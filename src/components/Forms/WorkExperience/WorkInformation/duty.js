@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Item = styled.li``;
+const Item = styled.li`
+  &:after {
+    display: inline-block;
+  }
+  &:before {
+    white-space: pre-line;
+  }
+`;
 const Icon = styled.i`
   cursor: pointer;
   align-self: center;

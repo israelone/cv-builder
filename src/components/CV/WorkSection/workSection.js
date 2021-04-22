@@ -2,23 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const WorkHistoryHeaders = styled.h2`
+  margin: 0;
   margin-left: 10px;
 `;
 
 const WorkInformation = styled(WorkHistoryHeaders)`
+  font-size: 18px;
   font-style: italic;
+  font-weight: normal;
 `;
 
 const DateWorked = styled(WorkHistoryHeaders)`
+  font-size: 14px;
   color: #b9b9bf;
+  text-transform: uppercase;
 `;
 
 const WorkHistory = styled.h3`
+  margin: 0;
   margin-left: 10px;
 `;
 
 const HorizontalRule = styled.hr`
-  width: 35%;
+  width: 275px;
   display: inline-block;
   margin-left: 10px;
 `;

@@ -14,13 +14,26 @@ const Button = styled.button`
 
 const Next = styled(Button)``;
 
-const Back = styled(Button)``;
+const Back = styled(Button)`
+  @media print {
+    display: none;
+  }
+`;
+
+const Print = styled(Button)`
+  @media print {
+    display: none;
+  }
+`;
 
 const ApplicationHeader = styled.h2`
   text-align: center;
   letter-spacing: 7px;
   font-family: Roboto;
   color: #2c698d;
+  @media print {
+    display: none;
+  }
 `;
 
 const FormsContainer = styled.div`
@@ -127,6 +140,10 @@ class Forms extends Component {
     }
   };
 
+  printResume = () => {
+    window.print();
+  };
+
   render() {
     return (
       <FormsContainer>
@@ -173,7 +190,10 @@ class Forms extends Component {
             <Next onClick={this.updateCurrentForm}>Next</Next>
           </React.Fragment>
         ) : (
-          <Back onClick={this.updateCurrentForm}>Back</Back>
+          <React.Fragment>
+            <Back onClick={this.updateCurrentForm}>Back</Back>
+            <Print onClick={this.printResume}>Print</Print>
+          </React.Fragment>
         )}
       </FormsContainer>
     );

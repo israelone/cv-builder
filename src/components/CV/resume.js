@@ -9,6 +9,10 @@ const ResumeContainer = styled.div`
   width: 75%;
   margin: 10px auto;
   border: 2px solid black;
+  @media print {
+    border: none;
+    margin-left: 10px;
+  }
 `;
 
 class Resume extends Component {

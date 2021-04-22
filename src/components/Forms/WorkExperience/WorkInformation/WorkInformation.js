@@ -79,6 +79,7 @@ class WorkInformation extends Component {
       showInformation: false,
       name: "workExperience",
       index: props.index,
+      editable: false,
     };
   }
 
@@ -93,15 +94,21 @@ class WorkInformation extends Component {
   render() {
     return (
       <Container>
-        <CompanyName>{this.props.companyName}</CompanyName>
-        <Role>{this.props.role}</Role>
+        <CompanyName contentEditable={this.state.editable}>
+          {this.props.companyName}
+        </CompanyName>
+        <Role contentEditable={this.state.editable}>{this.props.role}</Role>
         <DutiesList>
           {this.props.dutiesList.map((duty, index) => {
-            return <Duty key={index}>{duty}</Duty>;
+            return (
+              <Duty contentEditable={this.state.editable} key={index}>
+                {duty}
+              </Duty>
+            );
           })}
         </DutiesList>
-        <City>{this.props.city}</City>
-        <Date>{this.props.date}</Date>
+        <City contentEditable={this.state.editable}>{this.props.city}</City>
+        <Date contentEditable={this.state.editable}>{this.props.date}</Date>
         <IconsContainer>
           <RemoveIcon
             onClick={() => this.props.removeInformation(this.state.index)}
