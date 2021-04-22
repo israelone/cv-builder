@@ -2,12 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Item = styled.li`
-  &:after {
-    display: inline-block;
-  }
-  &:before {
-    white-space: pre-line;
-  }
+  overflow-wrap: anywhere;
 `;
 const Icon = styled.i`
   cursor: pointer;

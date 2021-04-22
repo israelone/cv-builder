@@ -35,7 +35,9 @@ const Date = styled.h4`
   margin: 0;
 `;
 
-const Duty = styled.li``;
+const Duty = styled.li`
+  overflow-wrap: anywhere;
+`;
 
 const DutiesList = styled.ul`
   overflow: hidden;
