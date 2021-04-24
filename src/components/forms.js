@@ -120,7 +120,6 @@ class Forms extends Component {
 
   updateCurrentForm = (e) => {
     e.preventDefault();
-    console.log(e.target.innerText);
     if (e.target.innerText === "Next") {
       this.setState({
         currentForm: this.state.currentForm + 1,
@@ -164,7 +163,7 @@ class Forms extends Component {
           ) : this.state.currentForm === 2 ? (
             <EducationForm
               education={this.state.education}
-              addEducationHandler={this.addEducation}
+              addEducation={this.addEducation}
               removeInformation={() => this.removeSchoolInformationHandler()}
             />
           ) : this.state.currentForm === 3 ? (

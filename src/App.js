@@ -15,3 +15,5 @@ class App extends Component {
 }
 
 export default App;
+
+//add education is not working, when deleting work history it deletes the first one

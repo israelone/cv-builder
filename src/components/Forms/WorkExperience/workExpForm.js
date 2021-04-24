@@ -187,7 +187,7 @@ class workExperienceForm extends Component {
               dutiesList={work.dutiesList}
               city={work.city}
               date={work.date}
-              removeInformation={() => this.removeInformationHandler()}
+              removeInformation={() => this.removeInformationHandler(index)}
             />
           );
         })}

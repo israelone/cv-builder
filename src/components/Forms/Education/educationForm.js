@@ -91,17 +91,18 @@ class EducationForm extends Component {
     currentSchools.push(newSchool);
     this.setState(
       {
-        schools: currentSchools,
+        education: currentSchools,
       },
       this.addHandler
     );
   };
 
   addHandler = () => {
-    this.props.addEducationHandler(this.state.education);
+    this.props.addEducation(this.state.education);
   };
 
   removeInformationHandler = (index) => {
+    console.log(this.state.education, index);
     let currentInformation = [...this.state.education];
     currentInformation.splice(index, 1);
     this.setState({
@@ -122,7 +123,7 @@ class EducationForm extends Component {
                 schoolName={school.schoolName}
                 graduationYear={school.graduationYear}
                 degree={school.degree}
-                removeInformation={() => this.removeInformationHandler()}
+                removeInformation={() => this.removeInformationHandler(index)}
                 index={index}
               />
             </React.Fragment>
